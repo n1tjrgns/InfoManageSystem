@@ -1,50 +1,58 @@
 package com.example.infomanage.domain;
 
+import lombok.*;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.time.LocalDate;
 
+@Getter
+@Setter
 @Entity
+@ToString // exclude 인자 값을 사용하면 ToString 대상에서 제외됨
+@NoArgsConstructor
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class Person {
 
     @Id
     @GeneratedValue
     private Long id;
 
+    @NonNull //필수 생성자 선언 @RequiredArgsConstructor랑 세트
     private String name;
 
+    @NonNull
     private int age;
 
-    public Long getId() {
-        return id;
-    }
+    private String hobby;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private String bloodType;
 
-    public String getName() {
-        return name;
-    }
+    private String address;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    private LocalDate birthday;
 
-    public int getAge() {
-        return age;
-    }
+    private String job;
 
-    public void setAge(int age) {
-        this.age = age;
-    }
+    private String phoneNumber;
 
-    @Override
-    public String toString() {
-        return "Person{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                '}';
+    public boolean equals(Object object){
+        if(object == null){
+            return false;
+        }
+
+        Person person = (Person) object;
+
+        if(!person.getName().equals(this.getName())){
+            return false;
+        }
+
+        if(person.getAge() != this.getAge()){
+            return false;
+        }
+
+        return true;
     }
 }
